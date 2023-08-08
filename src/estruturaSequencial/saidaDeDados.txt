@@ -1,0 +1,54 @@
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Main
+{
+    public static void main(String[] args) {
+        Locale.setDefault((Locale.US));
+        Scanner sc = new Scanner(System.in);
+
+        String nome;
+        int idadeNome, idadePai, idadeMae;
+        System.out.println("Nome: ");
+        nome = sc.next();
+        System.out.println("Idade: ");
+        idadeNome = sc.nextInt();
+        System.out.println("Idade do pai: ");
+        idadePai = sc.nextInt();
+        System.out.println("Idade da mae: ");
+        idadeMae = sc.nextInt();
+        System.out.println(String.format("Nome: %s. Idade: %d. Idade do Pai: %d. Idade da Mae: %d", nome, idadeNome, idadePai, idadeMae));
+        System.out.println("Finish");
+        /*
+        Nome:
+        Eduardo
+        Idade:
+        25
+        Idade do pai:
+        58
+        Idade da mae:
+        52
+        Nome: Eduardo. Idade: 25. Idade do Pai: 58. Idade da Mae: 52
+        Finish
+        */
+        System.out.print("Sobrenome: ");
+        String sobreNome = sc.next();
+        System.out.print("Nota 01: ");
+        Double nota1 = sc.nextDouble();
+        System.out.print("Nota 02: ");
+        Double nota2 = sc.nextDouble();
+        Double media = (nota1 + nota2) / 2;
+
+        System.out.println(String.format("Sobrenome %s. Nota1 : %.2f. Nota2: %.2f.", sobreNome, nota1, nota2));
+        System.out.print(String.format("MEDIA: %.2f", media));
+        /*
+        INLINE INPUTS
+        Sobrenome: Scheffer
+        Nota 01: 10.5
+        Nota 02: 12.5
+        Sobrenome Scheffer. Nota1 : 10.50. Nota2: 12.50.
+        MEDIA: 11.50
+
+        */
+    }
+}
