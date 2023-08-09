@@ -1,0 +1,35 @@
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args) {
+        Locale.setDefault((Locale.US));
+        Scanner sc = new Scanner(System.in);
+
+        String string = "ABCDE fghij ABced !E&u*-       *";
+
+        System.out.println("Formatar:");
+
+        System.out.print("string.toLowerCase() - ");
+        System.out.println(string.toLowerCase());
+
+        System.out.print("string.toUpperCase() - ");
+        System.out.println(string.toUpperCase());
+
+        System.out.print("string.trim() - ");
+        System.out.println(string.trim());
+
+        System.out.print("string.substring(3) - ");
+        System.out.println(string.substring(3));
+
+        System.out.print("string.substring(3, 7) - ");
+        System.out.println(string.substring(3, 7));
+
+        System.out.print("string.replace(\"A\", \"Z\") - ");
+        System.out.println(string.replace("A", "Z"));
+        System.out.print("string.replace(\"ced\", \"TNT\") - ");
+        System.out.println(string.replace("ced", "TNT"));
+
+        sc.close();
+    }
+}

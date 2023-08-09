@@ -1,0 +1,26 @@
+import introPOO.exercicioUm.entities.Triangle;
+
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args) {
+        Locale.setDefault((Locale.US));
+        Scanner sc = new Scanner(System.in);
+
+        Triangle triangleX = new Triangle(sc.nextDouble(), sc.nextDouble(), sc.nextDouble());
+        Triangle triangleY = new Triangle(sc.nextDouble(), sc.nextDouble(), sc.nextDouble());
+
+        System.out.printf("Triangle X area: %.4fcm²\n", triangleX.area);
+        System.out.printf("Triangle Y area: %.4fcm²\n", triangleY.area);
+
+        String largerTriangle = (triangleX.area > triangleY.area) ? "X": "Y";
+        System.out.println("Larger area: " + largerTriangle);
+        sc.close();
+    }
+}
+
+
+Fazer um programa para ler as medidas dos lados de dois triângulos X e Y (suponha medidas
+válidas). Em seguida, mostrar o valor das áreas dos dois triângulos e dizer qual dos dois triângulos
+possui a maior área.
