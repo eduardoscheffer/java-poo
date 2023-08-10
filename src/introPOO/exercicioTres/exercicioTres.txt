@@ -4,3 +4,32 @@ salário do funcionário com base em uma porcentagem dada (somente o salário br
 afetado pela porcentagem) e mostrar novamente os dados do funcionário. Use a classe
 projetada abaixo.
 
+import java.util.*;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Locale.setDefault(Locale.US);
+
+		Employee employee = new Employee();
+
+		System.out.print("Name: ");
+		employee.name = sc.nextLine();
+
+		System.out.print("Gross Salary: ");
+		employee.grossSalary = sc.nextDouble();
+
+		System.out.print("Tax: ");
+		employee.tax = sc.nextDouble();
+
+		System.out.print("Employee: " + employee);
+		System.out.println();
+		System.out.print("Which percentage to increase salary? ");
+		employee.increaseSalary(sc.nextDouble());
+		System.out.println();
+
+		System.out.print("Updated data: " + employee);
+
+		sc.close();
+	}
+}

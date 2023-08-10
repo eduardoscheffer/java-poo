@@ -4,3 +4,30 @@ ano. Dizer também se o aluno está aprovado (PASS) ou não (FAILED) e, em caso 
 para o aluno obter o mínimo para ser aprovado (que é 60% da nota). Você deve criar uma classe Student para
 resolver este problema.
 
+import java.util.*;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Locale.setDefault(Locale.US);
+
+		String name = sc.nextLine();
+		Double notaUm = sc.nextDouble();
+		Double notaDois = sc.nextDouble();
+		Double notaTres = sc.nextDouble();
+
+		Student student = new Student(name, notaUm, notaDois, notaTres);
+
+		System.out.println("FINAL GRADE = " + String.format("%.2f", (notaUm + notaDois + notaTres)));
+
+		if (student.alunoAprovado()) {
+			System.out.println("PASS");
+		} else {
+			System.out.println("FAILED");
+			System.out.println("MISSING " + String.format("%.2f", student.missingPoints()) + " POINTS");
+		}
+
+
+		sc.close();
+	}
+}
