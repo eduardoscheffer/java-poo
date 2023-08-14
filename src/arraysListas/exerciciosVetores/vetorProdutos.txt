@@ -1,0 +1,30 @@
+import arraysListas.exerciciosVetores.Product;
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Locale.setDefault((Locale.US));
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        Product[] produtos = new Product[n];
+
+
+        for (int i = 0; i < n; i++) {
+            sc.nextLine(); // pra fazer a quebra de linha
+            String name = sc.nextLine();
+            Double price = sc.nextDouble();
+
+            produtos[i] = new Product(name, price);
+        }
+
+        Double avg = 0.0;
+        for (var produto: produtos) avg += produto.getPrice();
+        avg = avg / produtos.length;
+
+        System.out.println("AVERAGE PRICE: = " + String.format("%.2f", avg));
+
+        sc.close();
+    }
+}

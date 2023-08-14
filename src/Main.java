@@ -1,4 +1,4 @@
-import contrutoresThisSobrecargaEncapsul.exercicioFixacao.entities.Account;
+import arraysListas.exerciciosFixacao.Employee;
 
 import java.util.*;
 
@@ -6,38 +6,45 @@ public class Main {
     public static void main(String[] args) {
         Locale.setDefault((Locale.US));
         Scanner sc = new Scanner(System.in);
-        Account acc;
+        List<Employee> employees = new ArrayList<>(); // ArrayList<Employee>
 
-        System.out.print("Enter account number: ");
-        Integer accNumber = sc.nextInt();
-        System.out.print("Enter account holder: ");
-        sc.nextLine();
-        String accHolder = sc.nextLine();
-        System.out.print("Is there an initial deposit (y/n)?: ");
-        char response = sc.next().charAt(0);
-        if (response == 'y') {
-            System.out.print("Enter initial deposit value: ");
-            double initialDeposit = sc.nextDouble();
-            acc = new Account(accNumber, accHolder, initialDeposit);
-        } else {
-            acc = new Account(accNumber, accHolder);
+        System.out.print("How many employees will be registered? ");
+        int qtdEmployees = sc.nextInt();
+
+        for (int i = 1; i <= qtdEmployees; i++) {
+            System.out.println();
+            System.out.println("Employee #" + i + ":");
+            System.out.print("ID: ");
+            Integer id = sc.nextInt();
+
+            System.out.print("Name: ");
+            System.out.println();
+            String name = sc.nextLine();
+
+            System.out.print("Salary");
+            Double salary = sc.nextDouble();
+
+            employees.add(new Employee(id, name, salary));
+
         }
-        System.out.println();
 
-        System.out.println("Account data:");
-        System.out.println(acc);
-        System.out.println();
+        System.out.print("Enter the employee id that will have salary increase: ");
+        Integer idEmployee = sc.nextInt();
 
-        System.out.print("Enter a deposit value: ");
-        acc.deposit(sc.nextDouble());
-        System.out.println("Updated account data:");
-        System.out.println(acc);
-        System.out.println();
+        for (var employee: employees) {
+            if (employee.getId() == idEmployee) {
+                System.out.print("Enter the percentage: ");
+                double percentageRaise = sc.nextDouble();
+                employee.increaseSalary(percentageRaise);
+            } else {
+                System.out.println("This id does not exist!");
+            }
+        }
 
-        System.out.print("Enter a withdraw value: ");
-        acc.withdraw(sc.nextDouble());
-        System.out.println("Updated account data:");
-        System.out.println(acc);
+        for (var emp : employees) {
+            System.out.println(emp);
+        }
 
+        sc.close();
     }
 }
