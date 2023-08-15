@@ -1,8 +1,7 @@
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Main {
@@ -10,41 +9,56 @@ public class Main {
         Locale.setDefault((Locale.US));
         Scanner sc = new Scanner(System.in);
 
-        // instanciar:
-        LocalDate d01 = LocalDate.now();
-        System.out.println("d01 - " + d01); // d01 - 2023-08-15
-
-        LocalDateTime d02 = LocalDateTime.now();
-        System.out.println("d02 - " + d02); // d02 - 2023-08-15T12:56:19.445384200
-
-        Instant d03 = Instant.now();
-        // data-hora GMT:
-        System.out.println("d03 - " + d03); // d03 - 2023-08-15T15:57:29.803839800Z
+        DateTimeFormatter fmtGlobal = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").withZone(ZoneId.systemDefault());
 
         LocalDate d04 = LocalDate.parse("2022-07-20");
-        System.out.println("d04 - " + d04); // d04 - 2022-07-20
 
         LocalDateTime d05 = LocalDateTime.parse("2022-07-20T01:30:26");
-        System.out.println("d05 - " + d05); // d05 - 2022-07-20T01:30:26
 
-        Instant d06 = Instant.parse("2022-07-20T01:30:26Z"); // horario de Londres (Z = GMT)
-        System.out.println("d06 - " + d06); // d06 - 2022-07-20T01:30:26Z
+        Instant d06 = Instant.parse("2022-07-20T01:30:26Z");
 
-        // DateTimeFormatter: https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html
-        DateTimeFormatter fmt1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate d08 = LocalDate.parse("09/09/1997", fmt1);
-        System.out.println("d08 - " + d08); // d08 - 1997-09-09
+        // subtraindo 1 semana do d04:
+        LocalDate pastWeekLocalDate = d04.minusDays(7);
+        System.out.println("1 Week ago from d04 - " + pastWeekLocalDate); // 1 Week ago from d04 - 2022-07-13
 
-        DateTimeFormatter fmt2 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime d09 = LocalDateTime.parse("09/09/1997 15:30", fmt2);
-        System.out.println("d09 - " + d09); // d09 - 1997-09-09T15:30
+        // adicionando 1 semana do d04:
+        LocalDate nextWeekLocalDate = d04.plusDays(7);
+        System.out.println("1 Week from d04 - " + nextWeekLocalDate); // 1 Week from d04 - 2022-07-27
 
-        // instanciando a partir de dados isolados:
-        LocalDate d10 = LocalDate.of(1997, 9, 9);
-        System.out.println("d10 - " + d10); // d10 - 1997-09-09
-        LocalDateTime d11 = LocalDateTime.of(2023, 9, 9, 12, 0);
-        System.out.println("d11 - " + d11); // d11 - 2023-09-09T12:00
-        System.out.println(d11.getDayOfWeek()); // SATURDAY
+        // adicinando e subtraindo horas e minutos e segundos do LocalDatetIme d05:
+        LocalDateTime pastHourLocalDateTime = d05.minusHours(1);
+        System.out.println("1 hour ago from d05 " +
+                    pastHourLocalDateTime.format(DateTimeFormatter
+                                         .ofPattern("dd/MM/yyyy HH:mm"))); // 1 hour ago from d05 20/07/2022 00:30
+
+        LocalDateTime nextHourLocalDateTime = d05.plusHours(10);
+        System.out.println("10 hour from d05 " +
+                nextHourLocalDateTime.format(DateTimeFormatter
+                        .ofPattern("dd/MM/yyyy HH:mm"))); // 10 hour from d05 20/07/2022 11:30
+
+        // calculos com Instants:
+        Instant pastWeekInstant = d06.minus(7, ChronoUnit.DAYS);
+        System.out.println("1 Week ago from d06 - " + fmtGlobal.format(pastWeekInstant)); // 1 Week ago from d06 - 12/07/2022 22:30
+
+        Instant nextWeekInstant = d06.plus(7, ChronoUnit.DAYS);
+        System.out.println("1 Week from d06 - " + fmtGlobal.format(nextWeekInstant)); // 1 Week from d06 - 26/07/2022 22:30
+
+        // Duração:
+        // Duration var = Duration.between(instanteInicial, instanteFinal);
+        Duration t1 = Duration.between(pastWeekInstant, nextWeekInstant);
+        System.out.println("Dias decorridos entre 12/07/2022 e 26/07/2022 = " + t1.toDays());
+
+        // Duration.between só aceita argumento LocalDateTime ou Instant's. Por isso convertemos LocalDate para LocalDateTime usando o .atStartOfDay();:
+        Duration t2 = Duration.between(pastWeekLocalDate.atStartOfDay(), d04.atStartOfDay());
+        System.out.println("Tempo decorrido entre 2022-07-13 e 2022-07-20 em minutos: " + t2.toMinutes()); // Tempo decorrido entre 2022-07-13 e 2022-07-20 em minutos: 10080
+        System.out.println();
+
+        System.out.println("Tempo decorrido do meu nascimento até hoje:");
+        LocalDate nascimento = LocalDate.parse("1997-09-09");
+        Duration tempoVivido = Duration.between(nascimento.atStartOfDay(), LocalDateTime.now());
+        System.out.println("Nascimento: " + nascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        System.out.println("Dias vividos: " + tempoVivido.toDays());
+
 
         sc.close();
 
