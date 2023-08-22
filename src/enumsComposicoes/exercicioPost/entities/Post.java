@@ -1,11 +1,19 @@
 package enumsComposicoes.exercicioPost.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class Post {
-    private LocalDate moment;
+    private final static DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    private LocalDateTime moment;
     private String title;
     private String content;
     private Integer likes;
@@ -15,47 +23,11 @@ public class Post {
     public Post() {
     }
 
-    public Post(LocalDate moment, String title, String content, Integer likes) {
+    public Post(LocalDateTime moment, String title, String content, Integer likes) {
         this.moment = moment;
         this.title = title;
         this.content = content;
         this.likes = likes;
-    }
-
-    public LocalDate getMoment() {
-        return moment;
-    }
-
-    public void setMoment(LocalDate moment) {
-        this.moment = moment;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Integer getLikes() {
-        return likes;
-    }
-
-    public void setLikes(Integer likes) {
-        this.likes = likes;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
     }
 
     public void addComment(Comment comment) {
@@ -68,13 +40,15 @@ public class Post {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Post{");
-        sb.append("moment=").append(moment);
-        sb.append(", title='").append(title).append('\'');
-        sb.append(", content='").append(content).append('\'');
-        sb.append(", likes=").append(likes);
-        sb.append(", comments=").append(comments);
-        sb.append('}');
+        final StringBuilder sb = new StringBuilder();
+        sb.append(title).append("\n");
+        sb.append(likes).append(" Likes - ").append(fmt.format(moment)).append("\n");
+        sb.append(content).append("\n");
+        sb.append("Comments: " + "\n");
+        for (Comment c : comments) {
+            sb.append(c.getText() + "\n");
+        }
+        //sb.append("\n");
         return sb.toString();
     }
 }
