@@ -12,6 +12,9 @@
     <inspection_tool class="ClassGetClass" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
     <inspection_tool class="ClassNewInstance" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
     <inspection_tool class="CollectionAddedToSelf" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
+    <inspection_tool class="CommentedOutCode" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="minLines" value="7" />
+    </inspection_tool>
     <inspection_tool class="ComparableImplementedButEqualsNotOverridden" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
     <inspection_tool class="ComparatorMethodParameterNotUsed" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
     <inspection_tool class="ComparatorResultComparison" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
@@ -105,7 +108,12 @@
     <inspection_tool class="ReplaceAllDot" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
     <inspection_tool class="ResultOfObjectAllocationIgnored" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
     <inspection_tool class="ResultSetIndexZero" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
-    <inspection_tool class="ReturnNull" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
+    <inspection_tool class="ReturnNull" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR">
+      <option name="m_reportObjectMethods" value="true" />
+      <option name="m_reportArrayMethods" value="true" />
+      <option name="m_reportCollectionMethods" value="true" />
+      <option name="m_ignorePrivateMethods" value="false" />
+    </inspection_tool>
     <inspection_tool class="ScheduledThreadPoolExecutorWithZeroCoreThreads" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
     <inspection_tool class="SortedCollectionWithNonComparableKeys" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
     <inspection_tool class="StaticCallOnSubclass" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />

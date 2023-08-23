@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +17,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order {
-    private LocalDate date;
+    private LocalDateTime date;
     private OrderStatus status;
     private Client client;
     private List<OrderItem> items = new ArrayList<>();
-    private Double totalOrder;
+    private Double totalOrder = 0.0;
 
     public void addItem(OrderItem item) {
         items.add(item);
@@ -30,11 +32,39 @@ public class Order {
         totalOrder -= item.subTotal();
     }
 
-    /*public Double total() {
+    public Order(LocalDateTime data, OrderStatus status, Client client) {
+        this.date = data;
+        this.status = status;
+        this.client = client;
+    }
+
+    /*
+    public Double total() {
         for (var item : items) {
             totalOrder += item.subTotal();
         }
         return totalOrder;
     }
     */
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+
+        sb.append("Order moment: ").append(date
+                .format(DateTimeFormatter
+                .ofPattern("dd/MM/yyyy HH:mm:ss \n")));
+
+        sb.append("Order status: ").append(status + "\n");
+        sb.append("Client: ").append(client + "\n");
+        sb.append("\n");
+        sb.append("Order items:" + "\n");
+        for (var item : items) {
+            sb.append(item);
+            sb.append("\n");
+        }
+        sb.append("Total price: $" + String.format("%.2f", getTotalOrder()));
+
+        return sb.toString();
+    }
 }
