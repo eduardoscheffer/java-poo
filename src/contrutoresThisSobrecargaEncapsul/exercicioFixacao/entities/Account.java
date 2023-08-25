@@ -25,6 +25,10 @@ public class Account {
         balance -= (amount + 5.00);
     }
 
+    public double getBalance() {
+        return balance;
+    }
+
     public Account(Integer numberAcc, String holderAcc) {
         number = numberAcc;
         holder = holderAcc;
