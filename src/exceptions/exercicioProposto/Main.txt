@@ -1,0 +1,58 @@
+import exceptions.exercicioProposto.model.entities.Reservation;
+import exceptions.exercicioProposto.model.exceptions.DomainException;
+import herancaPolimorfismo.classesAbstratas.exercicioFixacao.entities.Company;
+import herancaPolimorfismo.classesAbstratas.exercicioFixacao.entities.Individual;
+import herancaPolimorfismo.classesAbstratas.exercicioFixacao.entities.TaxPayer;
+
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Locale.setDefault((Locale.US));
+        Scanner sc = new Scanner(System.in);
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        try {
+            System.out.print("Room number: ");
+            Integer roomNumber = sc.nextInt();
+
+            sc.nextLine();
+
+            System.out.print("Check-in date (dd/MM/yyyy): ");
+            LocalDate checkinDate = LocalDate.parse(sc.nextLine(), fmt);
+
+            System.out.print("Check-out date (dd/MM/yyyy): ");
+            LocalDate checkoutDate = LocalDate.parse(sc.nextLine(), fmt);
+
+            Reservation reservation = new Reservation(roomNumber, checkinDate, checkoutDate);
+
+            System.out.println();
+
+            System.out.println(reservation);
+
+            System.out.println("Enter data to update the reservation:");
+            System.out.print("Check-in date (dd/MM/yyyy): ");
+            checkinDate = LocalDate.parse(sc.nextLine(), fmt);
+
+            System.out.print("Check-out date (dd/MM/yyyy): ");
+            checkoutDate = LocalDate.parse(sc.nextLine(), fmt);
+
+            reservation.updateDates(checkinDate, checkoutDate);
+
+            System.out.println(reservation);
+        }
+        catch (DomainException e) {
+            System.out.println("Error in reservation. " + e.getMessage());
+        }
+
+
+        sc.close();
+
+    }
+}

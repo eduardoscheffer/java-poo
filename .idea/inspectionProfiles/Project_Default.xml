@@ -103,6 +103,7 @@
     <inspection_tool class="OverflowingLoopIndex" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
     <inspection_tool class="OverwrittenKey" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
     <inspection_tool class="PrimitiveArrayArgumentToVariableArgMethod" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
+    <inspection_tool class="ReassignedVariable" enabled="false" level="TEXT ATTRIBUTES" enabled_by_default="false" />
     <inspection_tool class="RedundantOperationOnEmptyContainer" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
     <inspection_tool class="ReflectionForUnavailableAnnotation" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />
     <inspection_tool class="ReplaceAllDot" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" editorAttributes="GRAMMAR_ERROR" />

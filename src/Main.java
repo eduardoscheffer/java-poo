@@ -1,10 +1,4 @@
-import contrutoresThisSobrecargaEncapsul.exercicioFixacao.entities.Account;
-import herancaPolimorfismo.classesAbstratas.exercicioFixacao.entities.Company;
-import herancaPolimorfismo.classesAbstratas.exercicioFixacao.entities.Individual;
-import herancaPolimorfismo.classesAbstratas.exercicioFixacao.entities.TaxPayer;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -12,51 +6,14 @@ public class Main {
     public static void main(String[] args) {
         Locale.setDefault((Locale.US));
         Scanner sc = new Scanner(System.in);
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        List<TaxPayer> taxPayers = new ArrayList<>();
-
-        System.out.print("Enter the number of tax payers: ");
-        int n = sc.nextInt();
-
-        for (int i = 1; i <= n ; i++) {
-            System.out.print("Individual or company (i/c)? ");
-            char choice = sc.next().charAt(0);
-
-            sc.nextLine();
-            System.out.print("Name: ");
-            String name = sc.nextLine();
-
-            System.out.print("Anual income: ");
-            Double anualIncome = sc.nextDouble();
-
-            if (choice == 'i') {
-                System.out.print("Health expenditures: ");
-                Double healthExpenditures = sc.nextDouble();
-
-                taxPayers.add( new Individual(name, anualIncome, healthExpenditures));
-
-            }
-            else {
-                System.out.print("Number of employees: ");
-                Integer numEmployees = sc.nextInt();
-
-                taxPayers.add( new Company(name, anualIncome, numEmployees));
-
-            }
+        try {
 
         }
+        catch () {
 
-        System.out.println();
-        System.out.println("TAXES PAID:");
-        Double sum = 0.00;
-        for (var taxPayer : taxPayers) {
-            System.out.println(taxPayer.getName()
-                    + ": $ " + String.format("%.2f", taxPayer.tax()));
-            sum += taxPayer.tax();
         }
-
-        System.out.println();
-        System.out.println("TOTAL TAXES $ " + sum);
 
         sc.close();
 
