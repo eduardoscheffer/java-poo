@@ -2,8 +2,7 @@ import exceptions.exercicioFixacao.model.entities.Account;
 import exceptions.exercicioFixacao.model.exceptions.DomainException;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,35 +10,16 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        try {
-            System.out.println("Enter account data");
-            System.out.print("Number: ");
-            Integer accNumber = sc.nextInt();
+        List<String> nomes = Arrays.asList("Joao", "Maria");
 
-            sc.nextLine();
+        nomes.forEach(nome -> {
+            nome = nome.toUpperCase();
+            System.out.println(nome);
+        });
 
-            System.out.print("Holder: ");
-            String accHolder = sc.nextLine();
-
-            System.out.print("Initial balance: ");
-            Double accBalance = sc.nextDouble();
-
-            System.out.print("Withdraw limit: ");
-            Double accLimit = sc.nextDouble();
-
-            Account acc = new Account(accNumber, accHolder, accBalance, accLimit);
-
-            System.out.println();
-
-            System.out.print("Enter amount for withdraw: ");
-            acc.withDraw(sc.nextDouble());
-
-            System.out.println("New balance: $" + String.format("%.2f", acc.getBalance()));
-
-        }
-        catch (DomainException e) {
-            System.out.println(e.getMessage());
-        }
+        nomes.forEach(nome -> {
+            System.out.println(nome);
+        });
 
         sc.close();
 
