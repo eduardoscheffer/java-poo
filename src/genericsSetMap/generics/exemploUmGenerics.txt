@@ -1,0 +1,29 @@
+Suponha que você queira criar uma classe genérica para calcular a média de diferentes tipos de números, como inteiros, doubles ou floats. Você pode usar Generics para criar uma classe que possa lidar com esses diferentes tipos sem a necessidade de escrever implementações específicas para cada tipo.
+
+public class AverageCalculator<T extends Number> {
+    private T[] numbers;
+
+    public AverageCalculator(T[] numbers) {
+        this.numbers = numbers;
+    }
+
+    public double calculateAverage() {
+        double sum = 0.0;
+        for (T number : numbers) {
+            sum += number.doubleValue();
+        }
+        return sum / numbers.length;
+    }
+
+    public static void main(String[] args) {
+        Integer[] intNumbers = { 5, 10, 15, 20 };
+        Double[] doubleNumbers = { 2.5, 3.5, 4.5, 5.5 };
+
+        AverageCalculator<Integer> intAverageCalculator = new AverageCalculator<>(intNumbers);
+        System.out.println("Integer Average: " + intAverageCalculator.calculateAverage());
+
+        AverageCalculator<Double> doubleAverageCalculator = new AverageCalculator<>(doubleNumbers);
+        System.out.println("Double Average: " + doubleAverageCalculator.calculateAverage());
+    }
+}
+Neste exemplo, a classe AverageCalculator usa um tipo genérico T extends Number, o que significa que T deve ser uma subclasse de Number. Isso permite que a classe trabalhe com diferentes tipos numéricos. Através do método calculateAverage, a classe é capaz de calcular a média dos números independentemente do tipo exato (inteiro, double, float etc.) que está sendo usado.

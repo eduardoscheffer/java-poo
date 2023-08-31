@@ -1,0 +1,21 @@
+public class Box<T> {
+    private T value;
+
+    public Box(T value) {
+        this.value = value;
+    }
+
+    public T getValue() {
+        return value;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Box<Integer> intBox = new Box<>(42);
+        Box<String> strBox = new Box<>("Hello, Generics!");
+
+        System.out.println(intBox.getValue());  // Output: 42
+        System.out.println(strBox.getValue());  // Output: Hello, Generics!
+    }
+}
