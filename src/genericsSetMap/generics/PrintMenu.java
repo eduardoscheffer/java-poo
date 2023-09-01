@@ -1,5 +1,8 @@
 package genericsSetMap.generics;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class PrintMenu {
 
     // Cores ANSI para realce no console
@@ -18,5 +21,30 @@ public class PrintMenu {
         System.out.println(ANSI_YELLOW + " 6. Realizar ação 6" + ANSI_RESET);
         System.out.println(ANSI_YELLOW + " 7. Sair" + ANSI_RESET);
         System.out.println("=========================================");
+    }
+
+    public static int option() {
+
+        Scanner sc = new Scanner(System.in);
+        int option;
+        do {
+            try {
+                System.out.print("Opção desejada: ");
+                option = sc.nextInt();
+
+                if (option < 1 || option > 7)
+                    System.out.println("Escolha uma opção entre 1 e 7");
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Digite um número válido para seguir adiante");
+                sc.nextLine(); // Limpa o buffer do scanner
+                option = 0; // Atribui um valor inválido para continuar no loop
+            }
+        } while (option < 1 || option > 7);
+
+        sc.close();
+
+        return option;
+
     }
 }
