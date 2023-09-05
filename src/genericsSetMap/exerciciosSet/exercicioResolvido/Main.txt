@@ -1,0 +1,41 @@
+import genericsSetMap.exerciciosSet.exercicioResolvido.UserLog;
+
+import java.time.Instant;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Locale.setDefault((Locale.US));
+        Scanner sc = new Scanner(System.in);
+
+        String[] inputFile = {
+            "amanda 2018-08-26T20:45:08Z",
+            "alex86 2018-08-26T21:49:37Z",
+            "bobbrown 2018-08-27T03:19:13Z",
+            "amanda 2018-08-27T08:11:00Z",
+            "jeniffer3 2018-08-27T09:19:24Z",
+            "alex86 2018-08-27T22:39:52Z",
+            "amanda 2018-08-28T07:42:19Z",
+        };
+
+        Set<UserLog> userLogs = new HashSet<>();
+        for (String line : inputFile) {
+            String[] userLog = line .split(" ");
+            String username = userLog[0];
+            Instant loginTime = Instant.parse(userLog[1]);
+
+            userLogs.add(new UserLog(username, loginTime));
+        }
+
+        // a estrutura Set<UserLog> não deixa inserir dados repetidos com base no equals e hashcode
+        // do objeto em questao. No caso a classe LogEntry eu gerei o equals e o hashcode com
+        // base no username apenas;
+        System.out.println("Total users: " + userLogs.size());
+
+
+        sc.close();
+
+    }
+
+
+}

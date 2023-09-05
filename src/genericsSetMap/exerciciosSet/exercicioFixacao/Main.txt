@@ -1,0 +1,32 @@
+import genericsSetMap.exerciciosSet.exercicioFixacao.entities.Student;
+import genericsSetMap.exerciciosSet.exercicioResolvido.UserLog;
+
+import java.time.Instant;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Locale.setDefault((Locale.US));
+        Scanner sc = new Scanner(System.in);
+        String[] courseNames = {"A", "B", "C"};
+        Set<Student> studentsCount = new HashSet<>();
+
+        for (String courseName : courseNames) {
+            System.out.print("How many students for course " + courseName + "? ");
+            int n = sc.nextInt();
+            for (int i = 1; i <= n ; i++) {
+                studentsCount.add(new Student(sc.nextInt()));
+            }
+
+        }
+
+        System.out.println("Total students: " + studentsCount.size());
+        System.out.println("STUDENTS" + studentsCount);
+
+
+        sc.close();
+
+    }
+
+
+}
