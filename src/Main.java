@@ -1,42 +1,24 @@
-import genericsSetMap.exerciciosSet.exercicioFixacao.entities.Student;
-import genericsSetMap.exerciciosSet.exercicioResolvido.UserLog;
+import programacaoFuncional.interfaceComparator.Produto;
 
-import java.time.Instant;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         Locale.setDefault((Locale.US));
         Scanner sc = new Scanner(System.in);
-        String[] inputFile = {
-            "Alex Blue,15",
-            "Maria Green,22",
-            "Bob Brown,21",
-            "Alex Blue,30",
-            "Bob Brown,15",
-            "Maria Green,27",
-            "Maria Green,22",
-            "Bob Brown,25",
-            "Alex Blue,31"
-        };
 
-        Map<String, Integer> votos = new HashMap<>();
-        for (String line : inputFile) {
-            String[] voto = line.split(",");
-            // voto[0] = nome: String
-            // voto[1] = qtdVotos: Double
-            if (!votos.containsKey(voto[0])) { // se nao tiver o nome do candidato no Map ainda:
-                votos.put(voto[0], Integer.parseInt(voto[1])); // adiciona o candidato
-            }
-            else { // se já tiver o candidato ao map:
-                votos.put(voto[0], votos.get(voto[0]) + Integer.parseInt(voto[1])); // atualiza a sua Value - no caso o total de votos:
-            }
-        }
+        List<Produto> lista = new ArrayList<>(Arrays.asList(
 
-        for (String key : votos.keySet()) {
-            System.out.println(key + ": " + votos.get(key));
-        }
+                new Produto("Tv", 900.00),
+                new Produto("Mouse", 50.00),
+                new Produto("Tablet", 350.50),
+                new Produto("HD Case", 80.90)
 
+        ));
+
+        lista.removeIf((p) -> p.getPrice() > 100.00);
+
+        System.out.println(lista);
 
         sc.close();
 

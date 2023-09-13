@@ -1,0 +1,53 @@
+import programacaoFuncional.interfaceComparator.ProductComparator;
+import programacaoFuncional.interfaceComparator.Produto;
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Locale.setDefault((Locale.US));
+        Scanner sc = new Scanner(System.in);
+
+        List<Produto> list = new ArrayList<>(Arrays.asList(
+                new Produto("TV", 900.00),
+                new Produto("NoteBook", 1200.00),
+                new Produto("Tablet", 450.00)
+        ));
+
+        // list.sort(new ProductComparator()); // UTILIZANDO A CLASSE PRODUCTCOMPARATOR QUE IMPLEMENTA O COMPARATOR
+
+        Comparator<Produto> comparator = new Comparator<Produto>() {
+            @Override
+            public int compare(Produto p1, Produto p2) {
+                return p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase());
+            }
+        };
+
+        // UTILIZANDO FUNCOES LAMBDA:
+        Comparator<Produto> comparator2 = (p1, p2) -> {
+            return p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase());
+        };
+
+        list.sort(comparator2);
+
+        // UTILIZANDO LAMBDA DENTRO DA FUNCAO SORT:
+        list.sort((p1, p2) -> p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase()));
+
+        for (Produto produto : list) {
+            System.out.println(produto);
+        }
+
+        /*
+        Produto(name=NoteBook, price=1200.0)
+        Produto(name=Tablet, price=450.0)
+        Produto(name=TV, price=900.0)
+
+        **/
+
+
+        sc.close();
+
+    }
+
+
+}
