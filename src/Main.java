@@ -1,6 +1,8 @@
 import programacaoFuncional.interfaceComparator.Produto;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,19 +18,16 @@ public class Main {
 
         ));
 
-        List<String> listaString = lista.stream().map((produto -> produto.getName().toUpperCase())).toList(); // metodo map recebe uma interface Function como argumento e aplica essa Function a cada elemento da List
+        // pegando a media dos produtos:
+        double avg = (lista.stream()
+                .map(Produto::getPrice)
+                .reduce(0.0, Double::sum)) / lista.size();
+        System.out.println("MEDIA: R$ " + String.format("%.2f", avg)); // MEDIA: R$ 345.35
 
-        listaString.forEach(System.out::println); // Reference Method
-
-        // calculando a soma dos precos cujo nome começa com "T";
-        Double totalTProducts = lista.stream().filter(produto -> produto.getName().startsWith("T")) // filtrando a lista
-                .mapToDouble(Produto::getPrice) // transformando a lista de produtos em uma lista de Doubles
-                .reduce(0.0, Double::sum); // somando a lista de doubles
-
-        System.out.printf("%.2f", totalTProducts); // 1250.50
-
+        sc.close();
 
     }
+
 
 
 }
