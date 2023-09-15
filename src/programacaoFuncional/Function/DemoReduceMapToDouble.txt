@@ -1,6 +1,8 @@
 import programacaoFuncional.interfaceComparator.Produto;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,7 +28,6 @@ public class Main {
                 .reduce(0.0, Double::sum); // somando a lista de doubles
 
         System.out.printf("%.2f", totalTProducts); // 1250.50
-
 
     }
 
