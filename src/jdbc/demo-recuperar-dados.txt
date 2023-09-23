@@ -1,4 +1,4 @@
-import db.JDBCPostgreSQLConnection;
+import jdbc.db.JDBCPostgreSQLConnection;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

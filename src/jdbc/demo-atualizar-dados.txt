@@ -1,3 +1,4 @@
+
 import jdbc.db.JDBCPostgreSQLConnection;
 
 import java.sql.*;
@@ -7,7 +8,7 @@ public class Main {
         Locale.setDefault((Locale.US));
         Scanner sc = new Scanner(System.in);
 
-        // DEMO - INSERIR DADOS
+        // DEMO - ATUALIZAR DADOS
 
         Connection conn = null;
         PreparedStatement st = null;
@@ -16,21 +17,22 @@ public class Main {
             conn = JDBCPostgreSQLConnection.connect();
 
             st = conn.prepareStatement(
-                    "INSERT INTO department(department_name) "
-                    + "VALUES "
-                    + "(?)", Statement.RETURN_GENERATED_KEYS); // usado pra recuperar no fim do update o ID gerado no BD
+                    "UPDATE department "
+                    + "SET department_name = ? " + "WHERE (department_name = ?)"); // att no banco de dados
 
-            st.setString(1, "Gym");
+            st.setString(1, "Decoration");
+            st.setString(2, "Gym");
 
             int rows = st.executeUpdate();
 
             if (rows > 0) {
                 System.out.println("Updated. " + rows + " row(s) affected");
-                ResultSet rs = st.getGeneratedKeys();
+                /*ResultSet rs = st.getGeneratedKeys();
                 while (rs.next()) {
                     int idCreated = rs.getInt(1);
                     System.out.println("Id = " + idCreated);
                 }
+                */
             }
             else {
                 System.out.println("No rows affected");
