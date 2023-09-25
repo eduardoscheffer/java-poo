@@ -46,7 +46,7 @@ public class Main {
         }
         finally {
             JDBCPostgreSQLConnection.closeConnection();
-             JDBCPostgreSQLConnection.closeStatement(st);
+            JDBCPostgreSQLConnection.closeStatement(st);
         }
 
 

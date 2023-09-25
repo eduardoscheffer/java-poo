@@ -1,53 +1,11 @@
-import jdbc.db.DBException;
-import jdbc.db.DBIntegrityException;
-import jdbc.db.JDBCPostgreSQLConnection;
+import jdbc.dao.projetoJdbcDao.model.entities.Department;
 
-import java.sql.*;
 import java.util.*;
 public class Main {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         Locale.setDefault((Locale.US));
         Scanner sc = new Scanner(System.in);
 
-        // DEMO - TRANSAÇÕES
-
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = JDBCPostgreSQLConnection.connect();
-
-            st = conn.createStatement();
-            conn.setAutoCommit(false); // configuração que indica para NÃO confirmar as alterações automaticamente, o programador manualmente que confirma (conn.commit)
-
-            int rows1 = st.executeUpdate(
-                    "UPDATE department "
-                            + "SET department_name = " + "UPPER(department_name)"
-                            + "WHERE department_name = 'Cars'");
-
-            // SIMULAÇÃO DE UM ERRO NO MEIO DE UMA TRANSAÇÃO
-            int x = 2;
-            if (x < 2) throw new SQLException("Fake error!");
-
-            int rows2 = st.executeUpdate(
-                    "UPDATE department "
-                            + "SET department_name = " + "UPPER(department_name)"
-                            + "WHERE department_name = 'Sports'");
-
-            conn.commit(); // confirma manualmente o fim da transação
-
-        } catch (SQLException e) { // Qualquer SQL exception que vier a ocorrer, o sistema tenta dar rollback para nao prejudicar a transação
-            try {
-                conn.rollback(); // volta ao estado inicial e nao faz nenhuma alteração no DB
-                throw new DBException("Transaction rolled back! " + e.getMessage());
-            } catch (SQLException e2) {
-                throw new DBException("Error on rollback!");
-            }
-        }
-        finally {
-            JDBCPostgreSQLConnection.closeConnection();
-             JDBCPostgreSQLConnection.closeStatement(st);
-        }
 
 
         sc.close();
