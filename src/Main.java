@@ -3,6 +3,7 @@ import jdbc.dao.projetoJdbcDao.model.dao.SellerDao;
 import jdbc.dao.projetoJdbcDao.model.entities.Department;
 import jdbc.dao.projetoJdbcDao.model.entities.Seller;
 
+import java.time.LocalDate;
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
@@ -31,8 +32,34 @@ public class Main {
         [Seller {id=6, name='Alex Pink', email='bob@gmail.com', birthDate=1997-03-04, baseSalary=3000.0, department=Department {id=2, name='DepName'}},
         Seller {id=2, name='Maria Green', email='maria@gmail.com', birthDate=1979-12-31, baseSalary=3500.0, department=Department {id=2, name='DepName'}}]
         */
+        System.out.println();
 
+        System.out.println("=====TEST 3 - seller findAll=====");
+        List<Seller> findAllSellers = sellerDao.findAll();
+        System.out.println(findAllSellers);
 
+        /*
+        =====TEST 2 - seller findAll=====
+        [Seller {id=3, name='Alex Grey', email='alex@gmail.com', birthDate=1988-01-15, baseSalary=2200.0, department=Department {id=1, name='DepName'}},
+        Seller {id=6, name='Alex Pink', email='bob@gmail.com', birthDate=1997-03-04, baseSalary=3000.0, department=Department {id=2, name='DepName'}},
+        Seller {id=1, name='Bob Brown', email='bob@gmail.com', birthDate=1998-04-21, baseSalary=1000.0, department=Department {id=1, name='DepName'}},
+        Seller {id=5, name='Donald Blue', email='donald@gmail.com', birthDate=2000-01-09, baseSalary=4000.0, department=Department {id=3, name='DepName'}},
+        Seller {id=2, name='Maria Green', email='maria@gmail.com', birthDate=1979-12-31, baseSalary=3500.0, department=Department {id=2, name='DepName'}},
+        Seller {id=4, name='Martha Red', email='martha@gmail.com', birthDate=1993-11-30, baseSalary=3000.0, department=Department {id=4, name='DepName'}}]
+        */
+
+        System.out.println();
+        System.out.println("=====TEST 4 - seller insert=====");
+        Seller newSeller = new Seller(14, "Joao", "joao@gmail.com"
+                , LocalDate.of(1997, 9, 9)
+                , 2500.00, new Department(1, null));
+        sellerDao.insert(newSeller);
+        System.out.println("Seller inserted");
+
+        /*
+        =====TEST 4 - seller insert=====
+        Seller inserted
+        */
 
         sc.close();
 
