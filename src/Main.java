@@ -1,4 +1,6 @@
+import jdbc.dao.projetoJdbcDao.db.JDBCPostgreSQLConnection;
 import jdbc.dao.projetoJdbcDao.model.dao.DaoFactory;
+import jdbc.dao.projetoJdbcDao.model.dao.DepartmentDao;
 import jdbc.dao.projetoJdbcDao.model.dao.SellerDao;
 import jdbc.dao.projetoJdbcDao.model.entities.Department;
 import jdbc.dao.projetoJdbcDao.model.entities.Seller;
@@ -84,15 +86,30 @@ public class Main {
         sellerDao.deleteById(10);
         System.out.println("Deleted");
 
+        // System.out.println(sellerDao.findById(7)); // null
+
         /*
         =====TEST 6 - seller deleteById=====
         Deleted
         */
 
         System.out.println();
+        JDBCPostgreSQLConnection.closeConnection();
 
+        System.out.println("--------------------------------------------------------");
 
+        System.out.println("=====TEST 7 - department finByid=====");
+        DepartmentDao departmentDao = DaoFactory.createDepartmentDao();
+        System.out.println(departmentDao.findById(1));
+        /*
+        =====TEST 7 - department finByid=====
+        Connected to the PostgreSQL server successfully on schema public
+        Department {id=1, name='Computers'}
+        Connection closed.
+        */
 
+        System.out.println();
+        JDBCPostgreSQLConnection.closeConnection();
         sc.close();
 
     }
