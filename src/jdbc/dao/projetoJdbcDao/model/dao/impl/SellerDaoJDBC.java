@@ -62,12 +62,47 @@ public class SellerDaoJDBC implements SellerDao {
     }
 
     @Override
-    public void update(Seller Seller) {
+    public void update(Seller seller) {
+        PreparedStatement st = null;
 
+        try {
+            st = conn.prepareStatement(
+                    "UPDATE seller "
+                    + "SET Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ? "
+                    + "WHERE Id = ?");
+
+            st.setString(1, seller.getName());
+            st.setString(2, seller.getEmail());
+            st.setDate(3, Date.valueOf(seller.getBirthDate()));
+            st.setDouble(4, seller.getBaseSalary());
+            st.setInt(5, seller.getDepartment().getId());
+            st.setInt(6, seller.getId());
+
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DBException(e.getMessage());
+        } finally {
+            JDBCPostgreSQLConnection.closeStatement(st);
+        }
     }
 
     @Override
     public void deleteById(Integer id) {
+
+        PreparedStatement st = null;
+
+        try {
+            st = conn.prepareStatement("DELETE FROM seller " +
+                    "WHERE Id = ?");
+            st.setInt(1, id);
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DBException(e.getMessage());
+        } finally {
+            JDBCPostgreSQLConnection.closeStatement(st);
+        }
 
     }
 
@@ -84,6 +119,40 @@ public class SellerDaoJDBC implements SellerDao {
                             "ON seller.DepartmentId = department.Id " +
                             "WHERE seller.Id = ?");
             st.setInt(1, id);
+            rs = st.executeQuery();
+
+            if (rs.next()) { // se teve resultado do banco de dados, temos que converter o ResultSet em um objeto
+
+                Department dep = instantiateDepartment(rs);
+
+                return instantiateSeller(rs, dep);
+
+            }
+
+            return null;
+
+
+        } catch (SQLException e) {
+            throw new DBException(e.getMessage());
+        } finally {
+            JDBCPostgreSQLConnection.closeStatement(st);
+            JDBCPostgreSQLConnection.closeResultSet(rs);
+        }
+
+    }
+
+    @Override
+    public Seller findByEmail(String email) {
+
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        try {
+            st = conn.prepareStatement(
+                    "SELECT seller.* " +
+                            "FROM seller " +
+                            "WHERE seller.Email = ?");
+            st.setString(1, email);
             rs = st.executeQuery();
 
             if (rs.next()) { // se teve resultado do banco de dados, temos que converter o ResultSet em um objeto

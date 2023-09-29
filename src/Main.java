@@ -50,16 +50,48 @@ public class Main {
 
         System.out.println();
         System.out.println("=====TEST 4 - seller insert=====");
-        Seller newSeller = new Seller(14, "Joao", "joao@gmail.com"
+        Seller newSeller = new Seller(null, "Joao", "joao@gmail.com"
                 , LocalDate.of(1997, 9, 9)
                 , 2500.00, new Department(1, null));
-        sellerDao.insert(newSeller);
+        // sellerDao.insert(newSeller);
         System.out.println("Seller inserted");
 
         /*
         =====TEST 4 - seller insert=====
         Seller inserted
         */
+
+        System.out.println();
+        System.out.println("=====TEST 5 - seller update=====");
+        //Seller donaldBlue = sellerDao.findByEmail("donald@gmail.com");
+        //donaldBlue.setName("Ragnar");
+        //donaldBlue.setEmail("ragnar@gmail.com");
+        //sellerDao.update(donaldBlue);
+        System.out.println("Updated");
+        //donaldBlue = sellerDao.findByEmail("ragnar@gmail.com");
+        //System.out.println(donaldBlue);
+
+        /*
+        =====TEST 5 - seller update=====
+        Updated
+        Seller {id=5, name='Ragnar', email='ragnar@gmail.com', birthDate=2000-01-09, baseSalary=4000.0, department=Department {id=3, name='DepName'}}
+        */
+
+        System.out.println();
+
+        System.out.println("=====TEST 6 - seller deleteById=====");
+        sellerDao.deleteById(7);
+        sellerDao.deleteById(10);
+        System.out.println("Deleted");
+
+        /*
+        =====TEST 6 - seller deleteById=====
+        Deleted
+        */
+
+        System.out.println();
+
+
 
         sc.close();
 
