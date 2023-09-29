@@ -55,6 +55,7 @@ public class Main {
                 , 2500.00, new Department(1, null));
         sellerDao.insert(newSeller);
         System.out.println("Seller inserted");
+        System.out.println("GitTTT");
 
         /*
         =====TEST 4 - seller insert=====
